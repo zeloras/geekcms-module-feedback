@@ -25,7 +25,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Feedback\\Providers\\InitServiceProvider"
+                "GeekCms\\Feedback\\Providers\\InitServiceProvider"
             ],
             "aliases": {
                 
@@ -34,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Feedback\\": ""
+            "GeekCms\\Feedback\\": ""
         }
     }
 }
