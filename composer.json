@@ -36,5 +36,7 @@
         "psr-4": {
             "GeekCms\\Feedback\\": ""
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
