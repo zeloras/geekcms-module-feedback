@@ -1,4 +1,4 @@
-<div style="background: #ff7758;padding: 15px;margin:0px;font-size: 18px;">
+<div style="background: #ff7758;padding: 15px;margin:0;font-size: 18px;">
     <h2 style="text-align: center;color:#fff;font-size: 28px;text-transform: uppercase;">Новое сообщения</h2>
 
     <p style="background: #e0453a;color:#fff;padding: 15px;font-weight: bold;border-bottom: 3px solid #fff;">

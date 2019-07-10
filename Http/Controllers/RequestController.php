@@ -2,10 +2,12 @@
 
 namespace GeekCms\Feedback\Http\Controllers;
 
+use GeekCms\Feedback\Models\Lead;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
-use GeekCms\Feedback\Models\Lead;
+use Swift_TransportException;
+use function count;
 
 class RequestController extends Controller
 {
@@ -50,14 +52,13 @@ class RequestController extends Controller
                 $mail->from(config('mail.from.address'), config('app.name'));
 
                 $mail->to(config('feedback.email'), $leed)
-                    ->subject('Новое сообщение')
-                ;
+                    ->subject('Новое сообщение');
             });
-        } catch (\Swift_TransportException $e) {
+        } catch (Swift_TransportException $e) {
             $errors[] = $e->getMessage();
         }
 
-        if (\count($errors)) {
+        if (count($errors)) {
             return $errors;
         }
 
