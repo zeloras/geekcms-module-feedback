@@ -33,7 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "GeekCms\\Feedback\\": ""
+      "GeekCms\\Feedback\\": "src/"
     }
   },
   "minimum-stability": "dev",
