@@ -9,4 +9,8 @@ return [
     'field_created' => 'Создано',
     'field_message' => 'Сообщение',
     'new' => 'Новое',
+    'view_mail' => 'Посмотреть сообщение',
+    'action_delete' => 'Удалить',
+    'action_delete_confirm' => 'Удалить это сообщение?',
+    'feedback_delete_selected' => 'Удалить выбранные сообщения',
 ];

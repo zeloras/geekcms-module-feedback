@@ -10,10 +10,11 @@
     ],
     "aliases": [],
     "files": [
-        "src\/loader.php"
+        "src/loader.php"
     ],
     "requires": [
-        "GeekCms\\PackagesManager"
+        "GeekCms\\PackagesManager",
+        "GeekCms\\Translates"
     ],
     "access_permissions": [
         {
