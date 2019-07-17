@@ -14,6 +14,7 @@ class RequestController extends Controller
 {
     public function request(Request $request)
     {
+        $errors_logs = [];
         if ($request->get('email')) {
             $lead = Lead::create([
                 'first_name' => $request->get('first_name'),
@@ -22,16 +23,13 @@ class RequestController extends Controller
                 'message' => $request->get('message'),
             ]);
 
-            $this->sendEmail($lead);
+            $errors_logs = $this->sendEmail($lead);
 
-            return response()->json([
-                'result' => true,
-            ], 200);
+
+            return redirect()->back()->with(['message_feedback_send' => true]);
         }
 
-        return response()->json([
-            'result' => false,
-        ], 400);
+        return redirect()->back()->withErrors($errors_logs);
     }
 
     /**
@@ -47,10 +45,15 @@ class RequestController extends Controller
 
         try {
             Mail::send(ConfigManager::get('mail.template', 'clear tmp'), ['lead' => $leed], function ($mail) use ($leed) {
-                $mail->from(ConfigManager::get('mail.from.address', 'geekcms@localhost'), ConfigManager::get('mail.from.name', 'Geekcms'));
+                $mail->from([
+                    'address' => ConfigManager::get('mail.from.address', 'geekcms@localhost'),
+                    'name' => ConfigManager::get('mail.from.name', 'Geekcms')
+                ]);
 
-                $mail->to(ConfigManager::get('mail.to.address', 'geekcms@localhost'))
-                    ->subject(ConfigManager::get('mail.from.title', 'New message'));
+                $mail->to([
+                    'address' => ConfigManager::get('mail.to.address', 'geekcms@localhost'),
+                    'name' => ConfigManager::get('mail.to.name', 'localhost')
+                ])->subject(ConfigManager::get('mail.from.title', 'New message'));
             });
         } catch (Swift_TransportException $e) {
             $errors[] = $e->getMessage();

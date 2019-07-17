@@ -109,47 +109,59 @@
                         </div>
                     </div><!--.tab-pane-->
                     <div role="tabpanel" class="tab-pane fade" id="tabs-2-tab-2">
-                        <table class="display table table-striped table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td>{{ Translate::get('module_feedback::admin/main.settings.from_address') }}</td>
-                                    <td>
-                                        <input type="text" value="" name="config[mail.from.address]" class="form-control" placeholder="geekcms@localhost">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>{{ Translate::get('module_feedback::admin/main.settings.from_name') }}</td>
-                                    <td>
-                                        <input type="text" value="" name="config[mail.from.name]" class="form-control" placeholder="Geekcms">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>{{ Translate::get('module_feedback::admin/main.settings.to_address') }}</td>
-                                    <td>
-                                        <input type="text" value="" name="config[mail.to.address]" class="form-control" placeholder="support@localhost">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>{{ Translate::get('module_feedback::admin/main.settings.from_title') }}</td>
-                                    <td>
-                                        <input type="text" value="" name="config[mail.from.title]" class="form-control" placeholder="New feedback">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">{{ Translate::get('module_feedback::admin/main.settings.template') }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        @include('feedback::admin.components.wysiwyg', [
-                                            'name' => 'config[mail.template]',
-                                            'id' => 'mail_template',
-                                            'class' => 'mail_template',
-                                            'content' => ConfigManager::get('mail.template', old('mail_template'))
-                                        ])
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <form action="{{ route('admin.feedback.save') }}" method="POST">
+                            @csrf
+                            <table class="display table table-striped table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>{{ Translate::get('module_feedback::admin/main.settings.from_address') }}</td>
+                                        <td>
+                                            <input type="text" value="{{ ConfigManager::get('mail.from.address', old('config.mail.from.address')) }}" name="config[mail.from.address]" class="form-control" placeholder="geekcms@localhost">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ Translate::get('module_feedback::admin/main.settings.from_name') }}</td>
+                                        <td>
+                                            <input type="text" value="{{ ConfigManager::get('mail.from.name', old('config.mail.from.name')) }}" name="config[mail.from.name]" class="form-control" placeholder="Geekcms">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ Translate::get('module_feedback::admin/main.settings.to_address') }}</td>
+                                        <td>
+                                            <input type="text" value="{{ ConfigManager::get('mail.to.address', old('config.mail.to.address')) }}" name="config[mail.to.address]" class="form-control" placeholder="support@localhost">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ Translate::get('module_feedback::admin/main.settings.to_name') }}</td>
+                                        <td>
+                                            <input type="text" value="{{ ConfigManager::get('mail.to.name', old('config.mail.to.name')) }}" name="config[mail.to.name]" class="form-control" placeholder="Support">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ Translate::get('module_feedback::admin/main.settings.from_title') }}</td>
+                                        <td>
+                                            <input type="text" value="{{ ConfigManager::get('mail.from.title', old('config.mail.from.title')) }}" name="config[mail.from.title]" class="form-control" placeholder="New feedback">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">{{ Translate::get('module_feedback::admin/main.settings.template') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            @include('feedback::admin.components.wysiwyg', [
+                                                'name' => 'config[mail.template]',
+                                                'id' => 'mail_template',
+                                                'class' => 'mail_template',
+                                                'content' => ConfigManager::get('mail.template', old('config.mail.template'))
+                                            ])
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group text-center pt-3">
+                                <button type="submit" class="btn btn-inline btn-success btn-lg">{{Translate::get('module_feedback::admin/main.save')}}</button>
+                            </div>
+                        </form>
                     </div><!--.tab-pane-->
                 </div><!--.tab-content-->
             </section>

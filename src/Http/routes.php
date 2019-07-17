@@ -16,6 +16,11 @@ Route::group(['middleware' => ['web', 'permission:' . Gcms::MAIN_ADMIN_PERMISSIO
         Route::get('/delete-all', 'GeekCms\Feedback\Http\Controllers\AdminController@deleteAll')
             ->name('admin.feedback.delete.all');
     });
+
+    Route::group(['middleware' => ['permission:modules_feedback_admin_edit']], function () {
+        Route::post('/save', 'GeekCms\Feedback\Http\Controllers\AdminController@save')
+            ->name('admin.feedback.save');
+    });
 });
 
 Route::any('/api/feedback/request', 'GeekCms\Feedback\Http\Controllers\RequestController@request')

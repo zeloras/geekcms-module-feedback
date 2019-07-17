@@ -2,6 +2,7 @@
 
 namespace GeekCms\Feedback\Http\Controllers;
 
+use ConfigManager;
 use Exception;
 use GeekCms\Feedback\Models\Lead;
 use Illuminate\Contracts\View\Factory;
@@ -20,6 +21,26 @@ class AdminController extends Controller
         return view('feedback::admin.index', [
             'mails' => $leads,
         ]);
+    }
+
+    /**
+     * Save settings list.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function save(Request $request)
+    {
+        $configs = $request->post('config', []);
+
+        foreach ($configs as $key => $config) {
+            if (!empty($key)) {
+                ConfigManager::set($key, $config);
+            }
+        }
+
+        return redirect()->back();
     }
 
     /**

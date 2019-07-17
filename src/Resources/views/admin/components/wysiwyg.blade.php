@@ -43,7 +43,7 @@ $options = (isset($options) && is_array($options))
         // change input
         $('div.froala-{{$class}}').on('froalaEditor.contentChanged', function (e, editor) {
             var content = editor.html.get();
-            var txt = $('textarea.' + '{{$class}}' + '[name=' + '{{$name}}' + ']');
+            var txt = $('textarea.' + '{{$class}}');
 
 
             txt.html(content);
@@ -68,7 +68,7 @@ $options = (isset($options) && is_array($options))
 
                     txtCode.keyup(function (e) {
                         var content = $(this).val();
-                        var txt = $('textarea.' + '{{$class}}' + '[name=' + '{{$name}}' + ']');
+                        var txt = $('textarea.' + '{{$class}}');
 
                         txt.html(content);
                     });
