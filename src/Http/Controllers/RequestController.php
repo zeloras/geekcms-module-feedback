@@ -24,9 +24,9 @@ class RequestController extends Controller
             ]);
 
             $errors_logs = $this->sendEmail($lead);
-
-
-            return redirect()->back()->with(['message_feedback_send' => true]);
+            if (!count($errors_logs)) {
+                return redirect()->back()->with(['message_feedback_send' => true]);
+            }
         }
 
         return redirect()->back()->withErrors($errors_logs);

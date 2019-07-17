@@ -9,11 +9,11 @@ Route::group(['middleware' => ['web', 'permission:' . Gcms::MAIN_ADMIN_PERMISSIO
             ->name('admin.feedback.view');
     });
 
-    Route::group(['middleware' => ['permission:modules_feedback_admin_remove']], function () {
+    Route::group(['middleware' => ['permission:modules_feedback_admin_delete']], function () {
         Route::get('/delete/{message}', 'GeekCms\Feedback\Http\Controllers\AdminController@delete')
             ->name('admin.feedback.delete');
 
-        Route::get('/delete-all', 'GeekCms\Feedback\Http\Controllers\AdminController@deleteAll')
+        Route::post('/delete-all', 'GeekCms\Feedback\Http\Controllers\AdminController@deleteAll')
             ->name('admin.feedback.delete.all');
     });
 
