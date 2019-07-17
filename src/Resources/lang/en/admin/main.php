@@ -13,4 +13,13 @@ return [
     'action_delete' => 'Delete',
     'action_delete_confirm' => 'Delete this feedback?',
     'feedback_delete_selected' => 'Delete selected messages',
+    'messages_list' => 'Messages',
+    'message_settings' => 'Feedback settings',
+    'settings' => [
+        'from_address' => 'From email',
+        'from_name' => 'From name',
+        'to_address' => 'Send email to',
+        'from_title' => 'Message subject',
+        'template' => 'E-mail template'
+    ]
 ];

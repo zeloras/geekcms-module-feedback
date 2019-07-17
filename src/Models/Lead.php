@@ -2,10 +2,10 @@
 
 namespace GeekCms\Feedback\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\MainModel;
 use Ponich\Eloquent\Traits\VirtualAttribute;
 
-class Lead extends Model
+class Lead extends MainModel
 {
     use VirtualAttribute;
 
@@ -14,4 +14,8 @@ class Lead extends Model
     public $guarded = [];
 
     public $virtalAttributes = [];
+
+    protected $fillable = [
+        'first_name', 'last_name', 'email', 'notify'
+    ];
 }

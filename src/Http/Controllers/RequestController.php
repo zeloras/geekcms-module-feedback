@@ -2,6 +2,7 @@
 
 namespace GeekCms\Feedback\Http\Controllers;
 
+use ConfigManager;
 use GeekCms\Feedback\Models\Lead;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -18,10 +19,7 @@ class RequestController extends Controller
                 'first_name' => $request->get('first_name'),
                 'last_name' => $request->get('last_name'),
                 'email' => $request->get('email'),
-                'phone' => $request->get('phone'),
-                'phone_second' => $request->get('phone_second'),
                 'message' => $request->get('message'),
-                'notify' => 0,
             ]);
 
             $this->sendEmail($lead);
@@ -48,11 +46,11 @@ class RequestController extends Controller
         $errors = [];
 
         try {
-            Mail::send('feedback::email', ['lead' => $leed], function ($mail) use ($leed) {
-                $mail->from(config('mail.from.address'), config('app.name'));
+            Mail::send(ConfigManager::get('mail.template', 'clear tmp'), ['lead' => $leed], function ($mail) use ($leed) {
+                $mail->from(ConfigManager::get('mail.from.address', 'geekcms@localhost'), ConfigManager::get('mail.from.name', 'Geekcms'));
 
-                $mail->to(config('feedback.email'), $leed)
-                    ->subject('Новое сообщение');
+                $mail->to(ConfigManager::get('mail.to.address', 'geekcms@localhost'))
+                    ->subject(ConfigManager::get('mail.from.title', 'New message'));
             });
         } catch (Swift_TransportException $e) {
             $errors[] = $e->getMessage();

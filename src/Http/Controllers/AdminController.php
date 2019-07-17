@@ -17,7 +17,7 @@ class AdminController extends Controller
         $leads = Lead::orderBy('created_at', 'desc')
             ->paginate(15);
 
-        return view('feedback::index', [
+        return view('feedback::admin.index', [
             'mails' => $leads,
         ]);
     }
@@ -34,7 +34,7 @@ class AdminController extends Controller
     {
         $message_id = object_get($message, 'id');
 
-        return view('feedback::view', [
+        return view('feedback::admin.view', [
             'message' => $message
         ]);
     }
